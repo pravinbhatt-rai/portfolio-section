@@ -662,8 +662,8 @@ html[data-battle-theme="light"] .inner-liquid-header .theme-toggle{color:#17191b
 
 /* Projects starts as a quiet title card; ScrollTrigger folds it away to reveal the rail. */
 @media(min-width:761px){
-  .home-shell>.work-section{height:100svh;min-height:620px;padding:0;display:block;position:relative;overflow:hidden}
-  .home-shell>.work-section .project-stage{position:relative;width:100%;height:100%;perspective:1400px;overflow:hidden}
+  .home-shell>.work-section{height:auto;min-height:0;padding:0;display:block;position:relative;overflow:visible;scroll-snap-stop:normal}
+  .home-shell>.work-section .project-stage{position:sticky;top:0;width:100%;height:100svh;perspective:1400px;overflow:hidden}
   .home-shell>.work-section .project-intro-scene{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,5vw,76px) max(48px,calc((100vw - 1380px)/2));background:radial-gradient(ellipse at 50% 54%,#a9443b1b,transparent 45%),linear-gradient(120deg,#18171b,#21191d 58%,#14151a);backface-visibility:hidden;will-change:transform,opacity}
   html[data-battle-theme="light"] .home-shell>.work-section .project-intro-scene{background:radial-gradient(ellipse at 50% 54%,#a9443b16,transparent 45%),linear-gradient(120deg,#e8e0dc,#f0e7e2 58%,#e8e3dd)}
   .home-shell>.work-section .project-intro-scene .section-index{display:flex;justify-content:space-between;align-items:center}
@@ -698,13 +698,35 @@ html[data-battle-theme="light"] .inner-liquid-header .theme-toggle{color:#17191b
   .home-shell>.work-section .project-carousel-scene{inset:0;justify-content:center;padding:0 0 4vh}
   .home-shell>.work-section .project-viewport{height:min(66vh,650px);min-height:430px;overflow:visible;perspective:1300px;transform-style:preserve-3d}
   .home-shell>.work-section .project-track{position:relative;display:block!important;width:100%;height:100%;padding:0;overflow:visible;transform:none;transform-style:preserve-3d}
-  .home-shell>.work-section .project-card{position:absolute;top:50%;left:50%;width:min(54vw,680px);max-width:680px;flex:none;translate:-50% -50%;transform-origin:50% 75%;backface-visibility:hidden;will-change:transform,opacity;transition:box-shadow .3s,border-color .3s}
+  .home-shell>.work-section .project-card{position:absolute;top:50%;left:50%;width:min(54vw,680px);max-width:680px;flex:none;translate:-50% -50%;transform-origin:50% 75%;backface-visibility:hidden;will-change:transform,opacity;transition:filter .3s,box-shadow .3s,border-color .3s}
   .home-shell>.work-section .project-card .project-visual{height:clamp(240px,38vh,390px);min-height:0;border-radius:18px;box-shadow:0 25px 90px #0005}
   .home-shell>.work-section .project-card.is-centered .project-visual{border-color:#d46a58aa;box-shadow:0 30px 100px #0007,0 0 38px #d46a5820}
   .home-shell>.work-section .project-meta{padding:16px 8px 0}
   .home-shell>.work-section .carousel-controls,.home-shell>.work-section .carousel-tail{position:relative;z-index:10}
 }
 @media(max-width:760px){.home-shell>.work-section .project-viewport{height:auto;min-height:0;perspective:none}.home-shell>.work-section .project-track{height:auto}.home-shell>.work-section .project-card{position:relative;top:auto;left:auto;translate:none;transform:none!important;backface-visibility:visible}}
+
+/* The section is a scroll-length track; its inner stage stays on screen while
+   ScrollTrigger advances the layered deck one case study at a time. */
+@media(min-width:761px){
+  .home-shell>.work-section{max-height:none!important;overflow:visible!important}
+  .home-shell>.work-section .project-stage{z-index:1}
+  .home-shell>.work-section .project-intro-scene{z-index:5}
+  .home-shell>.work-section .project-viewport{overflow:visible!important;perspective:1400px;perspective-origin:50% 45%}
+  .home-shell>.work-section .project-track{position:relative;display:block!important;width:100%;height:100%;padding:0;overflow:visible;transform-style:preserve-3d}
+  .home-shell>.work-section .project-card{transform-style:preserve-3d;transition:filter .25s,box-shadow .25s,border-color .25s}
+  .home-shell>.work-section.project-static-carousel{height:auto!important;min-height:100svh!important;max-height:none!important;overflow:visible!important;padding-block:42px!important}
+  .home-shell>.work-section.project-static-carousel .project-stage{position:relative;height:auto;overflow:visible}
+  .home-shell>.work-section.project-static-carousel .project-intro-scene{position:relative;inset:auto;min-height:28svh;padding:24px 0;background:none}
+  .home-shell>.work-section.project-static-carousel .project-carousel-scene{position:relative;inset:auto;padding:0}
+  .home-shell>.work-section.project-static-carousel .project-viewport{height:auto;min-height:0;overflow-x:auto!important;overflow-y:hidden;perspective:none}
+  .home-shell>.work-section.project-static-carousel .project-track{display:flex!important;position:relative;width:max-content;height:auto;gap:18px;transform:none!important;transform-style:flat}
+  .home-shell>.work-section.project-static-carousel .project-card{position:relative;top:auto;left:auto;translate:none;transform:none!important;flex:0 0 min(72vw,700px);filter:none;opacity:1}
+}
+@media(max-width:760px){
+  .home-shell>.work-section{height:auto!important;min-height:100svh!important;max-height:none!important;overflow:hidden!important;padding-block:55px 25px!important}
+  .home-shell>.work-section .project-stage{position:relative;top:auto;height:auto;overflow:hidden}
+}
 
 /* Desktop ring carousel: ScrollTrigger rotates the whole 3D track one project at a time. */
 @media(min-width:761px){
@@ -730,6 +752,19 @@ html[data-battle-theme="light"] .inner-liquid-header .theme-toggle{color:#17191b
   .home-shell>.work-section.project-static-carousel .project-track{display:flex!important;position:relative;width:max-content;height:auto;gap:18px;transform:none!important;transform-style:flat}
   .home-shell>.work-section.project-static-carousel .project-card{position:relative;top:auto;left:auto;translate:none;transform:none!important;flex:0 0 min(72vw,700px);filter:none;opacity:1}
 }
+@media(min-width:761px){
+  .home-shell>.work-section .project-intro-scene{inset:0 0 auto;height:clamp(132px,19vh,190px);z-index:4;justify-content:flex-start;gap:18px;padding:22px max(48px,calc((100vw - 1380px)/2));background:transparent;pointer-events:none}
+  .home-shell>.work-section .project-intro-scene .section-index{pointer-events:auto}
+  .home-shell>.work-section .project-title-lockup{align-self:flex-start;display:flex;align-items:baseline;justify-items:start;gap:18px;margin:0;text-align:left}
+  .home-shell>.work-section .project-title-lockup h2{font-size:clamp(54px,6vw,82px);line-height:.9;letter-spacing:-.08em}
+  .home-shell>.work-section .project-title-lockup>span{font-size:9px}
+  .home-shell>.work-section .project-title-lockup p{font-size:10px;margin:0}
+  .home-shell>.work-section .project-carousel-scene{inset:0;justify-content:center;padding:120px 0 30px}
+  .home-shell>.work-section .project-viewport{height:min(58vh,560px);min-height:380px;visibility:visible!important;opacity:1!important}
+  .home-shell>.work-section.project-story-ready .project-viewport{visibility:visible!important;opacity:1!important}
+  .home-shell>.work-section .carousel-controls{opacity:1;visibility:visible;margin:0 auto;width:min(900px,calc(100% - 96px))}
+  .home-shell>.work-section .carousel-tail{margin:8px auto 0;width:min(900px,calc(100% - 96px))}
+}
 
 /* Offset bento composition: tall anchor tiles balance the wider skill clusters. */
 @media(min-width:1001px){
@@ -750,6 +785,53 @@ html[data-battle-theme="light"] .inner-liquid-header .theme-toggle{color:#17191b
   .home-shell>.skills-bento-section .skill-bento-group:nth-child(4n){background:linear-gradient(145deg,#5e66751b,#ffffff03)}
   .home-shell>.skills-bento-section .skill-bento-items{grid-template-columns:repeat(auto-fill,48px);grid-auto-rows:48px;gap:8px}
   .home-shell>.skills-bento-section .skill-bento-icon{width:48px;height:48px;min-width:48px;max-width:48px;min-height:48px}
+}
+
+/* Simple project gallery: natural document flow, no pinning or carousel state. */
+#work.project-gallery-section{
+  width:100vw;height:auto!important;min-height:100svh;max-height:none!important;
+  margin-inline:calc(50% - 50vw);padding:clamp(76px,10vh,120px) clamp(22px,6vw,96px)!important;
+  overflow:visible!important;scroll-snap-align:start;scroll-snap-stop:normal;
+  background:radial-gradient(ellipse at 78% 12%,#b44d3824,transparent 36%),linear-gradient(135deg,#17171b,#20191d 54%,#15161a);
+}
+html[data-battle-theme="light"] #work.project-gallery-section{background:radial-gradient(ellipse at 78% 12%,#b44d381b,transparent 36%),linear-gradient(135deg,#eee9e3,#f6f1ec 54%,#e9e5df)}
+.project-gallery-inner{width:min(1420px,100%);margin-inline:auto}
+.project-gallery-heading{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:clamp(28px,5vh,56px)}
+.project-gallery-kicker{display:block;margin-bottom:15px;color:#d46a58;font-size:11px;letter-spacing:.18em}
+.project-gallery-heading h2{margin:0;font-size:clamp(64px,9vw,120px);font-weight:500;line-height:.85;letter-spacing:-.085em}
+.project-gallery-heading h2 span{color:#d46a58}
+.project-gallery-all{display:inline-flex;align-items:center;gap:28px;padding:13px 0;border-bottom:1px solid #d46a5880;font-size:13px;color:var(--ink);white-space:nowrap}
+.project-gallery-all span{color:#d46a58}
+.project-gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,26px)}
+.project-gallery-item{position:relative;display:block;min-width:0;padding:10px;border:1px solid color-mix(in srgb,var(--line) 78%,transparent);border-radius:20px;background:linear-gradient(145deg,#ffffff0b,#ffffff04);overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s}
+.project-gallery-item:hover,.project-gallery-item:focus-visible{transform:translateY(-5px);border-color:#dd7968aa;box-shadow:0 18px 55px #0003,0 0 28px #d46a5817;outline:none}
+.project-gallery-visual{position:relative;display:grid;place-items:center;aspect-ratio:16/8.5;min-height:190px;overflow:hidden;border-radius:13px;background:radial-gradient(ellipse at 50% 20%,#ffffff18,transparent 60%),linear-gradient(135deg,#332b30,#17191e)}
+.morrow .project-gallery-visual{background:radial-gradient(ellipse at 55% 35%,#84915f88,transparent 50%),linear-gradient(140deg,#344238,#141a19)}
+.fieldnotes .project-gallery-visual{background:radial-gradient(ellipse at 52% 35%,#aa704f88,transparent 48%),linear-gradient(140deg,#47322e,#19181b)}
+.openhouse .project-gallery-visual{background:radial-gradient(ellipse at 48% 35%,#667f7888,transparent 50%),linear-gradient(140deg,#2c3d3a,#15191d)}
+.project-gallery-visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.project-gallery-item:hover .project-gallery-visual>img{transform:scale(1.045)}
+.project-gallery-art{position:relative;width:clamp(120px,19vw,220px);aspect-ratio:1;border:1px solid #f1d1c35c;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 70px #e0806330,inset 0 0 42px #e0806314}
+.project-gallery-art>span{font:italic clamp(68px,10vw,120px)/1 var(--font-playfair);color:#f6e6dc;position:relative;z-index:1}
+.project-gallery-art i,.project-gallery-art b{position:absolute;inset:13%;border:1px solid #f1d1c35c;border-radius:50%}
+.project-gallery-art b{inset:27%;border-style:dashed}
+.project-gallery-open,.project-gallery-index{position:absolute;top:13px;z-index:1;padding:9px 12px;border:1px solid #ffffff45;border-radius:99px;background:#1113199c;color:#fff;font-size:9px;letter-spacing:.12em;backdrop-filter:blur(12px)}
+.project-gallery-open{right:13px}.project-gallery-index{left:13px}
+.project-gallery-copy{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:19px 8px 11px}
+.project-gallery-copy>div>span{color:#d88472;font-size:9px;letter-spacing:.14em}
+.project-gallery-copy h3{margin:8px 0 6px;font-size:clamp(19px,2.1vw,28px);font-weight:500;letter-spacing:-.04em}
+.project-gallery-copy p{max-width:650px;margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+.project-gallery-arrow{flex:none;color:#e17c68;font-size:24px;transition:transform .25s}
+.project-gallery-item:hover .project-gallery-arrow{transform:translate(3px,-3px)}
+@media(max-width:700px){
+  #work.project-gallery-section{padding:66px 17px 76px!important}
+  .project-gallery-heading{align-items:flex-start;flex-direction:column;margin-bottom:27px}
+  .project-gallery-heading h2{font-size:68px}
+  .project-gallery-grid{grid-template-columns:1fr;gap:13px}
+  .project-gallery-visual{aspect-ratio:16/9;min-height:170px}
+  .project-gallery-copy{padding:15px 5px 8px}
+  .project-gallery-copy h3{font-size:20px}
+  .project-gallery-copy p{font-size:12px}
 }
 .story-rail{right:clamp(14px,1.1vw,24px)}
 

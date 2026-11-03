@@ -1,0 +1,6 @@
+Samurai model
+Source: https://grab3d.com/models/characters/samurai/
+File: samurai-rigged.glb
+License: CC0 1.0 Universal
+
+The rigged GLB includes walk/run clips and PBR textures. The portfolio uses its original materials and adds scroll-controlled portrait framing and pose changes.

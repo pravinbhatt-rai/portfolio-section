@@ -1,0 +1,4 @@
+import Link from "next/link";
+import { PageFrame } from "../inner-page";
+import { ContactForm } from "./contact-form";
+export default function Contact(){return <PageFrame number="04" label="GET IN TOUCH" title={<>Building something<br/><em>interesting?</em></>}><div className="contact-page-grid reveal"><div><p className="large-copy">I’m open to good engineering problems and thoughtful teams.</p><p className="inner-lede">Based in Roorkee, India. For opportunities, collaborations, or a conversation about backend systems and applied AI, send me a note.</p><a className="contact-email" href="mailto:pravinbhattarai45@gmail.com">pravinbhattarai45@gmail.com <span>↗</span></a><p className="social-links"><Link href="https://linkedin.com/in/pravinbhattarai" target="_blank">LinkedIn ↗</Link><Link href="https://github.com/pravinbhattarai" target="_blank">GitHub ↗</Link></p></div><ContactForm/></div></PageFrame>}

@@ -1,69 +1,31 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { ScrollReveals, StoryControls } from "./story-controls";
+import { SplineScene } from "../components/ui/splite";
+import { ContactForm } from "./contact/contact-form";
+import { GenerativeTree } from "../components/ui/generative-tree";
+import { ThemeToggle } from "./theme-toggle";
+import { ProjectCarousel } from "./project-carousel";
+import { PublishedTeasers } from "./content-list";
+import { SkillsBento } from "./skills-section";
+import { LiquidNavbar, NimbusIcons } from "../components/ui/liquid-glass-navbar";
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  return <main className="site-shell home-shell">
+    <ScrollReveals />
+    <StoryControls />
+    <header className="liquid-header"><Link className="wordmark" href="/">PB<span>®</span></Link><LiquidNavbar tone="dark" defaultActive={0} sound={false} items={[{label:"Home",href:"#intro",icon:NimbusIcons.home,fx:"glow"},{label:"Skills",href:"#skills",icon:NimbusIcons.globe,fx:"spin"},{label:"Work",href:"#work",icon:NimbusIcons.plane,fx:"plane"},{label:"Journal",href:"#journal",icon:NimbusIcons.drop,fx:"drop"},{label:"Contact",href:"#contact",icon:NimbusIcons.user,fx:"wave"}]}/><ThemeToggle/></header>
+    <section className="hero wrap" id="intro"><div className="hero-kicker"><span className="availability"><i /> SOFTWARE & AI ENGINEER · ROORKEE, INDIA</span><span>FULL-STACK · BACKEND · GENERATIVE AI</span></div><div className="hero-main"><div className="hero-copy"><p className="eyebrow">BUILDING SYSTEMS THAT MOVE PEOPLE AND DATA.</p><h1>I build<br /><em>systems</em><br /><span className="indent">that scale.</span></h1><p className="hero-intro">I’m Pravin, a software and AI engineer building end-to-end products, dependable backend systems, and practical generative AI.</p><div className="hero-actions"><Link className="button button-dark" href="/projects">Explore my work <span>↗</span></Link><a className="text-link" href="#story">My journey <span>↓</span></a></div></div><div className="hero-art" aria-label="Interactive 3D robot scene" onPointerMove={(event) => { const r = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--tilt-x", `${((event.clientX - r.left) / r.width - .5) * 7}deg`); event.currentTarget.style.setProperty("--tilt-y", `${(.5 - (event.clientY - r.top) / r.height) * 7}deg`); event.currentTarget.style.setProperty("--spot-x", `${event.clientX - r.left}px`); event.currentTarget.style.setProperty("--spot-y", `${event.clientY - r.top}px`); }} onPointerLeave={(event) => { event.currentTarget.style.setProperty("--tilt-x", "0deg"); event.currentTarget.style.setProperty("--tilt-y", "0deg"); }}><SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="hero-spline-scene"/></div></div><div className="hero-foot"><span>SCROLL TO FOLLOW THE THREAD</span><span className="scroll-line"/><span>01 — 07</span></div></section>
+    <section className="marquee" aria-label="Design with intention"><div className="marquee-track">BUILD WITH INTENTION <span>✳</span> THINK IN SYSTEMS <span>✳</span> MAKE AI USEFUL <span>✳</span> BUILD WITH INTENTION <span>✳</span></div></section>
+    <section className="story wrap section-pad" id="story"><div className="section-index reveal"><span>01 / THE SHORT VERSION</span><span>SCROLL STORY — KEEP GOING ↓</span></div><div className="story-grid"><h2 className="reveal">Good work starts<br />with <em>good questions.</em></h2><div className="story-body reveal"><p className="large-copy">I’m drawn to the space between a hard technical problem and a solution that feels simple to use.</p><p>I work across backend engineering and AI: designing APIs, tuning database access, and connecting services into dependable systems. I care about the details because performance and reliability are part of the user experience.</p><Link className="under-link" href="/about">More about my experience <span>↗</span></Link></div></div><div className="principles"><div className="principle reveal"><span>01</span><strong>Performance matters.</strong><p>Fast systems make better product experiences.</p></div><div className="principle reveal"><span>02</span><strong>Design for failure.</strong><p>Reliable services recover without taking everything down.</p></div><div className="principle reveal"><span>03</span><strong>Keep learning.</strong><p>300+ algorithm challenges and counting.</p></div></div></section>
+    <SkillsBento/>
+    <ProjectCarousel/>
+    <section className="approach wrap section-pad" id="journey"><div className="section-index reveal"><span>04 / EXPERIENCE & EDUCATION</span><span>SOFTWARE ENGINEER · SIX INDIA</span></div><div className="approach-grid"><h2 className="reveal">Good systems<br />start with <em>people.</em></h2><div className="approach-list"><div className="approach-step reveal"><span>01</span><div><h3>AI Engineer & Full-Stack Developer · Six India</h3><p>Apr 2026 – Present · Remote, India. Building full-stack product features and applied AI systems at Six India.</p></div><span className="step-mark">↘</span></div><div className="approach-step reveal"><span>02</span><div><h3>B.Tech, Computer Science & Engineering</h3><p>RIT Roorkee · 2022 – 2026</p></div><span className="step-mark">↘</span></div><div className="approach-step reveal"><span>03</span><div><h3>300+ problems solved</h3><p>Regular practice across LeetCode and other coding platforms. Technical team contributor.</p></div><span className="step-mark">↘</span></div></div></div></section>
+    <section className="quote-section"><div className="wrap quote-inner reveal"><span className="quote-star">✳</span><p>“Build it to work.<br />Then make it <em>work better.</em>”</p><span className="quote-credit">A PRACTICAL APPROACH TO ENGINEERING</span></div></section>
+    <section className="journal-section section-pad" id="journal"><div className="wrap"><div className="section-index reveal"><span>05 / FIELD NOTES</span><Link href="/blog">THE JOURNAL ↗</Link></div><div className="journal-grid"><div className="journal-heading reveal"><p className="eyebrow">THOUGHTS FROM THE BUILD</p><h2>Notes from<br /><em>the work.</em></h2><p>Ideas, lessons, and small discoveries from building software that has to work in the real world.</p><Link className="under-link" href="/blog">Read the journal <span>↗</span></Link></div><Link className="journal-card reveal" href="/blog"><span className="journal-art"><i>FIELD<br/>NOTES</i><b>✳</b></span><span className="journal-card-meta">LATEST WRITING · UPDATES AS I PUBLISH</span><strong>Engineering notes, project stories, and lessons learned.</strong><span className="journal-open">OPEN JOURNAL ↗</span></Link></div><PublishedTeasers type="blog"/></div></section>
+    <section className="achievement-section section-pad" id="achievements"><div className="wrap"><div className="section-index reveal"><span>06 / MILESTONES</span><Link href="/achievements">ALL ACHIEVEMENTS ↗</Link></div><div className="achievement-top reveal"><h2>Progress worth<br/><em>remembering.</em></h2><p>A few markers from the long road of learning, building, and showing up.</p></div><div className="achievement-bento-grid"><article className="achievement-bento-card"><span>01</span><strong>300+ problems solved</strong><small>DATA STRUCTURES & ALGORITHMS</small></article><article className="achievement-bento-card"><span>02</span><strong>B.Tech · Computer Science</strong><small>RIT ROORKEE · 2022—2026</small></article><article className="achievement-bento-card"><span>03</span><strong>Community builder</strong><small>HACKATHONS · WORKSHOPS · 100+ PARTICIPANTS</small></article><div className="achievement-tree-tile"><GenerativeTree speed={0.8} size={0.9} particleAmount={0.7} opacity={0.86} hue={-8} saturation={0.8} brightness={0.8}/><span>STAY CURIOUS<br/><em>KEEP GROWING</em></span></div></div><PublishedTeasers type="achievement"/></div></section>
+    <section className="contact-section wrap section-pad" id="contact"><div className="section-index reveal"><span>07 / YOUR TURN</span><span>GOOD THINGS START SOMEWHERE</span></div><div className="contact-home-grid"><div className="contact-home-copy reveal"><p className="eyebrow">WORKING ON A CHALLENGE?</p><h2>Let’s build<br/><em>something.</em></h2><p>Have an idea, a role, or a system that needs thoughtful engineering? Send me a note.</p><a href="mailto:pravinbhattarai45@gmail.com">pravinbhattarai45@gmail.com ↗</a><div className="contact-home-social"><a href="https://linkedin.com/in/pravinbhattarai" target="_blank" rel="noreferrer">LINKEDIN ↗</a><a href="https://github.com/pravinbhattarai" target="_blank" rel="noreferrer">GITHUB ↗</a></div></div><ContactForm/></div><footer className="footer wrap"><Link className="wordmark" href="/">PB<span>®</span></Link><span>PRAVIN BHATTARAI · SOFTWARE & AI ENGINEER</span><span>ROORKEE, INDIA</span></footer>
+    </section>
+  </main>;
 }

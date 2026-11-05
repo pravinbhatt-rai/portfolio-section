@@ -4,9 +4,10 @@ import { ScrollReveals } from "./story-controls";
 import { ThemeToggle } from "./theme-toggle";
 import { LiquidNavbar, NimbusIcons } from "../components/ui/liquid-glass-navbar";
 import { GenerativeTree } from "../components/ui/generative-tree";
+import { HomeMenu } from "./home-menu";
 
 export function SiteNav() {
-  return <header className="liquid-header inner-liquid-header"><Link className="wordmark" href="/">PB<span>®</span></Link><LiquidNavbar tone="dark" defaultActive={0} sound={false} items={[{label:"Home",href:"/",icon:NimbusIcons.home,fx:"glow"},{label:"Skills",href:"/#skills",icon:NimbusIcons.globe,fx:"spin"},{label:"Work",href:"/projects",icon:NimbusIcons.plane,fx:"plane"},{label:"Journal",href:"/blog",icon:NimbusIcons.drop,fx:"drop"},{label:"Contact",href:"/contact",icon:NimbusIcons.user,fx:"wave"}]}/><ThemeToggle/></header>;
+  return <header className="liquid-header inner-liquid-header"><Link className="wordmark" href="/">PB<span>®</span></Link><LiquidNavbar tone="dark" defaultActive={0} sound={false} items={[{label:"Home",href:"/",icon:NimbusIcons.home,fx:"glow"},{label:"Skills",href:"/#skills",icon:NimbusIcons.globe,fx:"spin"},{label:"Work",href:"/projects",icon:NimbusIcons.plane,fx:"plane"},{label:"Journal",href:"/blog",icon:NimbusIcons.drop,fx:"drop"},{label:"Contact",href:"/contact",icon:NimbusIcons.user,fx:"wave"}]}/><ThemeToggle/><HomeMenu homePage={false}/></header>;
 }
 export function PageFrame({ number, label, title, children, showModel = true }: { number: string; label: string; title: React.ReactNode; children: React.ReactNode; showModel?: boolean }) {
   function adjustScene(event: React.PointerEvent<HTMLDivElement>) {

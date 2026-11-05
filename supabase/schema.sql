@@ -143,6 +143,9 @@ insert into public.portfolio_content (type, slug, title, summary, body, publishe
 ('project', 'fitness', 'Fitness & Nutrition Tracking', 'Image-based food recognition and personalized nutrition.', 'Built a backend for image-based food recognition, calorie tracking, and personalized nutrition analysis with a retrieval pipeline.', true)
 on conflict (type, slug) do nothing;
 
+-- Tell PostgREST to make newly created tables available immediately.
+notify pgrst, 'reload schema';
+
 insert into public.skills (name, category, description, sort_order) values
 ('Python', 'Languages', 'Backend services, APIs, and AI workflows.', 1),
 ('TypeScript', 'Languages', 'Typed, dependable application code.', 2),
@@ -209,3 +212,5 @@ insert into public.portfolio_content (type, slug, title, summary, body, publishe
 ('achievement', 'doctar-organic-growth', 'Doctar.in reached 500–700 clicks in 28 days', 'Organic search growth for a healthcare discovery platform.', 'Helped grow Doctar.in organic search traffic from near zero to approximately 500–700 clicks in 28 days.', true),
 ('achievement', 'technical-seo-top-ten', 'Top 10 search rankings across India', 'Technical SEO and performance work on used-vehicle pages.', 'Improved Google search rankings for multiple used-vehicle pages, reaching Top 10 positions across India.', true)
 on conflict (type, slug) do nothing;
+
+notify pgrst, 'reload schema';

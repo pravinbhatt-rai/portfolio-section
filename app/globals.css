@@ -1136,6 +1136,25 @@ html[data-battle-theme="dark"] .home-shell>.hero-liquid-section::after{content:"
 }
 @media(prefers-reduced-motion:reduce){.home-menu-panel{animation:none}.home-menu-trigger,.home-menu-glyph i{transition:none}}
 
+/* Account identity sits beside the menu on every page. */
+.home-menu{gap:10px}
+.home-menu-profile{min-width:0;max-width:190px;display:flex;align-items:center;gap:9px;padding:5px 11px 5px 6px;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);background:color-mix(in srgb,var(--paper) 72%,transparent);color:var(--ink);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.home-menu-avatar{position:relative;width:32px;height:32px;flex:none;display:grid;place-items:center;overflow:hidden;background:color-mix(in srgb,var(--ink) 9%,var(--paper));color:var(--muted);font-size:14px;font-weight:600}
+.home-menu-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.home-menu-avatar>span{position:relative;z-index:0}
+.home-menu-profile-copy{min-width:0;display:grid;gap:2px}
+.home-menu-profile-copy strong{max-width:125px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;font-weight:600}
+.home-menu-profile-copy small{font-size:8px;letter-spacing:.12em;color:var(--muted)}
+.home-menu-profile.is-signed-in .home-menu-avatar{background:color-mix(in srgb,#91a794 22%,var(--paper));color:var(--ink)}
+.home-menu-account-card{display:flex;align-items:center;gap:12px;padding:0 0 16px;border-bottom:1px solid var(--line)}
+.home-menu-avatar-large{width:46px;height:46px;font-size:18px}
+.home-menu-name{display:block;margin-top:8px;color:var(--ink);font-size:15px;line-height:1.2}
+.home-menu-account-card .home-menu-email{margin:4px 0 0}
+.home-menu-status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:9px;letter-spacing:.14em}
+.home-menu-status i{width:7px;height:7px;border:1px solid var(--muted)}
+.home-menu-status i.is-online{background:#91a794;border-color:#91a794;box-shadow:0 0 10px #91a79488}
+@media(max-width:700px){.home-menu{gap:6px}.home-menu-profile{padding:4px;max-width:40px}.home-menu-avatar{width:30px;height:30px}.home-menu-profile-copy{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.home-menu-trigger{width:40px;height:40px}}
+
 /* Warm paper and mineral surfaces give both palettes more depth than flat gray. */
 :root{
   --paper:#F4F0E7;

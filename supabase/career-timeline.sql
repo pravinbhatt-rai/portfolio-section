@@ -86,3 +86,6 @@ set description = 'Worked across fintech and healthcare products, contributing t
 where title = 'Software Developer Intern'
   and organization = 'Six India Private Limited'
   and start_date = '2025-08-01';
+
+-- Refresh PostgREST's table cache after applying the timeline schema.
+notify pgrst, 'reload schema';

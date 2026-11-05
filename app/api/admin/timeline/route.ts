@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { canEditPortfolio, canViewPortfolio } from "../../../lib/admin-session";
-import { cmsConfigured, cmsRequest } from "../../../lib/supabase-rest";
+import { cmsConfigured, cmsRequest, cmsSetupError } from "../../../lib/supabase-rest";
 
 const categories = new Set(["Education", "Experience", "Project", "Achievement"]);
 const cleanText = (value: unknown, limit: number) => String(value ?? "").trim().slice(0, limit);
@@ -40,8 +40,9 @@ export async function GET() {
   try {
     const items = await cmsRequest<unknown[]>("career_milestones?select=*&order=sort_order.asc,start_date.asc");
     return NextResponse.json({ items: items || [] });
-  } catch {
-    return NextResponse.json({ error: "Could not load timeline entries. Apply the career timeline schema in Supabase first." }, { status: 503 });
+  } catch (error) {
+    const setup = cmsSetupError(error, "load career timeline entries");
+    return NextResponse.json({ error: setup.message }, { status: setup.status });
   }
 }
 
@@ -55,8 +56,9 @@ export async function POST(request: Request) {
   try {
     const saved = await cmsRequest("career_milestones", { method: "POST", headers: { Prefer: "return=representation" }, body: JSON.stringify(result.value) });
     return NextResponse.json({ saved }, { status: 201 });
-  } catch {
-    return NextResponse.json({ error: "Could not save the milestone. Check the Supabase migration and required fields." }, { status: 500 });
+  } catch (error) {
+    const setup = cmsSetupError(error, "save this career milestone");
+    return NextResponse.json({ error: setup.message }, { status: setup.status });
   }
 }
 
@@ -69,14 +71,14 @@ export async function PATCH(request: Request) {
     try {
       const saved = await cmsRequest(`career_milestones?id=eq.${encodeURIComponent(body.id)}`, { method: "PATCH", headers: { Prefer: "return=representation" }, body: JSON.stringify({ sort_order: Math.max(0, Math.min(10000, Number(body.sort_order))), updated_at: new Date().toISOString() }) });
       return NextResponse.json({ saved });
-    } catch { return NextResponse.json({ error: "Could not reorder the milestone." }, { status: 500 }); }
+    } catch (error) { const setup = cmsSetupError(error, "reorder career milestones"); return NextResponse.json({ error: setup.message }, { status: setup.status }); }
   }
   const result = normalize(body);
   if (result.error) return NextResponse.json({ error: result.error }, { status: 400 });
   try {
     const saved = await cmsRequest(`career_milestones?id=eq.${encodeURIComponent(body.id)}`, { method: "PATCH", headers: { Prefer: "return=representation" }, body: JSON.stringify(result.value) });
     return NextResponse.json({ saved });
-  } catch { return NextResponse.json({ error: "Could not update the milestone." }, { status: 500 }); }
+  } catch (error) { const setup = cmsSetupError(error, "update this career milestone"); return NextResponse.json({ error: setup.message }, { status: setup.status }); }
 }
 
 export async function DELETE(request: Request) {
@@ -87,5 +89,5 @@ export async function DELETE(request: Request) {
   try {
     await cmsRequest(`career_milestones?id=eq.${encodeURIComponent(id)}`, { method: "DELETE" });
     return NextResponse.json({ ok: true });
-  } catch { return NextResponse.json({ error: "Could not delete the milestone." }, { status: 500 }); }
+  } catch (error) { const setup = cmsSetupError(error, "delete this career milestone"); return NextResponse.json({ error: setup.message }, { status: setup.status }); }
 }

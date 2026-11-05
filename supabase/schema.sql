@@ -169,13 +169,19 @@ insert into public.skills (name, category, description, sort_order) values
 ('OpenAI API', 'AI Engineering', 'Integrating language models into applications.', 33),
 ('Claude API', 'AI Engineering', 'Model-powered workflows and tool use.', 34),
 ('Multi-agent systems', 'AI Engineering', 'Independent agents coordinated by reliable orchestration.', 35),
-('Data structures & algorithms', 'CS Foundations', '900+ problem-solving exercises and counting.', 40),
+('Data structures & algorithms', 'CS Foundations', '800+ problem-solving exercises and counting.', 40),
 ('System design', 'CS Foundations', 'Tradeoffs across data, scale, and product behavior.', 41),
 ('Distributed systems', 'CS Foundations', 'Reliability, coordination, and failure boundaries.', 42),
 ('Concurrency', 'CS Foundations', 'Reasoning about parallel work and shared resources.', 43),
 ('React + Next.js', 'Web Engineering', 'Building responsive, server-rendered web applications.', 50),
-('HTML + CSS', 'Web Engineering', 'Accessible interface structure and visual systems.', 51)
+('HTML + CSS', 'Web Engineering', 'Accessible interface structure and visual systems.', 51),
+('Linux', 'Cloud & Operations', 'Linux environments and command-line workflows.', 52),
+('Async/event-driven design', 'Backend & APIs', 'Concurrent services and event-driven workflows.', 53)
 on conflict (name) do nothing;
+
+update public.skills
+set description = '800+ problem-solving exercises and counting.'
+where name = 'Data structures & algorithms';
 
 with links (skill_name, project_slug) as (values
   ('Python','orchestration'), ('Python','doctar'), ('Python','six-finance'), ('Python','fitness'),
@@ -194,3 +200,12 @@ with links (skill_name, project_slug) as (values
 insert into public.project_skills (project_id, skill_id)
 select p.id, s.id from links l join public.skills s on s.name = l.skill_name join public.portfolio_content p on p.type = 'project' and p.slug = l.project_slug
 on conflict do nothing;
+
+
+-- Resume-backed achievements and profile milestones (safe to rerun).
+insert into public.portfolio_content (type, slug, title, summary, body, published) values
+('achievement', '800-algorithm-problems', '800+ algorithm problems solved', 'Consistent practice across data structures and algorithms.', 'Solved more than 800 programming and algorithmic problems across coding platforms, strengthening problem solving and core computer science foundations.', true),
+('achievement', 'six-finance-built-from-scratch', 'Built Six Finance from scratch', 'A fintech platform for loans, credit cards, and insurance.', 'Contributed across product development, responsive interfaces, backend APIs, database workflows, optimization, and delivery.', true),
+('achievement', 'doctar-organic-growth', 'Doctar.in reached 500–700 clicks in 28 days', 'Organic search growth for a healthcare discovery platform.', 'Helped grow Doctar.in organic search traffic from near zero to approximately 500–700 clicks in 28 days.', true),
+('achievement', 'technical-seo-top-ten', 'Top 10 search rankings across India', 'Technical SEO and performance work on used-vehicle pages.', 'Improved Google search rankings for multiple used-vehicle pages, reaching Top 10 positions across India.', true)
+on conflict (type, slug) do nothing;

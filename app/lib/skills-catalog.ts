@@ -4,7 +4,7 @@ import {
   siMongodb, siJest, siNextdotjs, siTailwindcss, siHtml5, siCss,
   siExpress, siMysql, siFirebase, siQdrant, siAnthropic, siLanggraph,
   siClaude, siSwagger, siOpenapiinitiative, siGithubactions, siVercel,
-  siRailway, siWebauthn, siScrumalliance,
+  siRailway, siWebauthn, siScrumalliance, siSpringboot,
 } from "simple-icons";
 import type { SimpleIcon } from "simple-icons";
 
@@ -34,6 +34,7 @@ const foundation = [project.loan, project.quant, project.finance];
 export const skillGroups: SkillGroup[] = [
   { name: "Programming languages", slug: "languages", skills: [
     { slug: "python", name: "Python", icon: siPython, mark: "Py", projectSlugs: all },
+    { slug: "java", name: "Java", mark: "Ja", projectSlugs: all },
     { slug: "cpp", name: "C++", icon: siCplusplus, mark: "C++", projectSlugs: foundation },
     { slug: "javascript", name: "JavaScript", icon: siJavascript, mark: "JS", projectSlugs: web },
     { slug: "typescript", name: "TypeScript", icon: siTypescript, mark: "TS", projectSlugs: web },
@@ -49,6 +50,8 @@ export const skillGroups: SkillGroup[] = [
     { slug: "jwt-authentication", name: "JWT authentication", mark: "JWT", projectSlugs: web },
   ] },
   { name: "Backend & APIs", slug: "backend", skills: [
+    { slug: "spring-boot", name: "Spring Boot", icon: siSpringboot, mark: "SB", projectSlugs: all },
+    { slug: "async-event-driven", name: "Async/event-driven design", mark: "↝", projectSlugs: all },
     { slug: "nodejs", name: "Node.js", icon: siNodedotjs, mark: "Node", projectSlugs: web },
     { slug: "expressjs", name: "Express.js", icon: siExpress, mark: "Ex", projectSlugs: web },
     { slug: "fastapi", name: "FastAPI", icon: siFastapi, mark: "Fa", projectSlugs: all },
@@ -96,6 +99,7 @@ export const skillGroups: SkillGroup[] = [
     { slug: "langsmith", name: "LangSmith", icon: siLangchain, mark: "Ls", projectSlugs: ai },
   ] },
   { name: "Cloud & operations", slug: "cloud-operations", skills: [
+    { slug: "linux", name: "Linux", mark: "Li", projectSlugs: all },
     { slug: "docker", name: "Docker", icon: siDocker, mark: "D", projectSlugs: all },
     { slug: "aws-ec2", name: "AWS EC2", mark: "EC2", projectSlugs: web },
     { slug: "amazon-s3", name: "Amazon S3", mark: "S3", projectSlugs: web },

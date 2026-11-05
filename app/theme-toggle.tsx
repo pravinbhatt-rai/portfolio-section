@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export function ThemeToggle() {
-  const [dark, setDark] = useState(true);
-  useEffect(() => {
+  const [dark, setDark] = useState(false);
+  useLayoutEffect(() => {
+    const current = document.documentElement.dataset.battleTheme;
     const saved = localStorage.getItem("battle-theme");
-    const value = saved === "light" ? "light" : "dark";
-    document.documentElement.dataset.battleTheme = value;
+    const value = current === "dark" || current === "light" ? current : saved === "dark" ? "dark" : "light";
+    if (current !== value) document.documentElement.dataset.battleTheme = value;
     setDark(value === "dark");
   }, []);
   function toggle() {
